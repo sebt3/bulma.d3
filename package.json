@@ -1,0 +1,22 @@
+{
+  "name": "bulma.d3",
+  "version": "1.0.0",
+  "description": "bulma.io javascript library based on d3-selection",
+  "main": "index.js",
+  "scripts": {
+    "prepack": "rollup -c"
+  },
+  "author": "Sebastien Huss <sebastien.huss@gmail.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "bulma": "^0.9.0",
+    "d3-selection": "^2.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-inject": "^4.0.2",
+    "eslint": "6",
+    "rollup": "1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "5"
+  }
+}
