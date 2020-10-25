@@ -61,22 +61,22 @@ export default function() {
 		if(me)  me.classed('has-arrow-separator',false).classed('has-bullet-separator',false).classed('has-dot-separator',false).classed('has-succeeds-separator',true)
 		return breadcrumb
 	}
-	breadcrumb.sizeDefault	= function() {
+	breadcrumb.defaultSize	= function() {
 		sz='';
 		if(me)  me.classed('is-small',false).classed('is-medium',false).classed('is-large',false)
 		return breadcrumb
 	}
-	breadcrumb.sizeSmall	= function() {
+	breadcrumb.small	= function() {
 		sz='is-small';
 		if(me)  me.classed('is-small',true).classed('is-medium',false).classed('is-large',false)
 		return breadcrumb
 	}
-	breadcrumb.sizeMedium	= function() {
+	breadcrumb.medium	= function() {
 		sz='is-medium';
 		if(me)  me.classed('is-small',false).classed('is-medium',true).classed('is-large',false)
 		return breadcrumb
 	}
-	breadcrumb.sizeLarge	= function() {
+	breadcrumb.large	= function() {
 		sz='is-large';
 		if(me)  me.classed('is-small',false).classed('is-medium',false).classed('is-large',true)
 		return breadcrumb

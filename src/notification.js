@@ -1,6 +1,6 @@
-export default function(t) {
+export default function(text) {
 	var color	= 'primary';
-	var body, text	= t?t:'';
+	var body, text	= text?text:'';
 	function notif(it) {it.each(function() {
 		body = bulma.select(this).append('div').attr('class', 'notification is-'+color).html(text);
 		var del = body.append('button').attr('class', 'delete');
