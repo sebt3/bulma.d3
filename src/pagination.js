@@ -1,7 +1,9 @@
 var page_prev_text = 'Previous';
 var page_next_text = 'Next';
+import {default as addSize} from "./sub/size.js";
+import {default as addAlign} from "./sub/align.js";
 export default function(maximum = 1, current = 1) {
-	var me, ul, prv, nxt, max = maximum, cur = current, sz='', align='', style='';
+	var me, ul, prv, nxt, max = maximum, cur = current, style='';
 	function update() {
 		function sep() { ul.append('li').append('span').attr('class','pagination-ellipsis').html('&hellip;'); }
 		function add(i) {
@@ -33,14 +35,18 @@ export default function(maximum = 1, current = 1) {
 	}
 	function pagination(it) {it.each(function() {
 		me = bulma.select(this).append('nav').attr('class','pagination').attr('aria-label','pagination')
-		if (align!='')	me.classed(align,true)
-		if (sz!='')	me.classed(sz,true)
+		if (pagination.getAlign()!='')	me.classed(pagination.getAlign(),true)
+		if (pagination.getSize()!='')	me.classed(pagination.getSize(),true)
 		if (style!='')	me.classed(style,true)
 		prv = me.append('a').classed('pagination-previous',true).text(page_prev_text)
 		nxt = me.append('a').classed('pagination-next',true).text(page_next_text)
 		ul  = me.append('ul').classed('pagination-list',true)
 		update()
+		addSize(pagination, me)
+		addAlign(pagination, me)
 	})}
+	addSize(pagination, me)
+	addAlign(pagination, me)
 	pagination.cur		= function(current) {
 		if(current) cur = current;
 		else return cur;
@@ -70,41 +76,6 @@ export default function(maximum = 1, current = 1) {
 	pagination.rounded	= function() {
 		style='is-rounded';
 		if(me)	me.classed('is-rounded',true)
-		return pagination
-	}
-	pagination.alignLeft	= function() {
-		align='';
-		if(me)	me.classed('is-centered',false).classed('is-right',false)
-		return pagination
-	}
-	pagination.alignCenter	= function() {
-		align='is-centered';
-		if(me)	me.classed('is-centered',true).classed('is-right',false)
-		return pagination
-	}
-	pagination.alignRight	= function() {
-		align='is-right';
-		if(me)	me.classed('is-centered',false).classed('is-right',true)
-		return pagination
-	}
-	pagination.defaultSize	= function() {
-		sz='';
-		if(me)  me.classed('is-small',false).classed('is-medium',false).classed('is-large',false)
-		return pagination
-	}
-	pagination.small	= function() {
-		sz='is-small';
-		if(me)  me.classed('is-small',true).classed('is-medium',false).classed('is-large',false)
-		return pagination
-	}
-	pagination.medium	= function() {
-		sz='is-medium';
-		if(me)  me.classed('is-small',false).classed('is-medium',true).classed('is-large',false)
-		return pagination
-	}
-	pagination.large	= function() {
-		sz='is-large';
-		if(me)  me.classed('is-small',false).classed('is-medium',false).classed('is-large',true)
 		return pagination
 	}
 	return pagination

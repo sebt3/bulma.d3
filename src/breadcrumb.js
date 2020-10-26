@@ -1,5 +1,7 @@
+import {default as addSize} from "./sub/size.js";
+import {default as addAlign} from "./sub/align.js";
 export default function() {
-	var me,ul,i,align='',sz='',sep='',lst=[];
+	var me,ul,i,sep='',lst=[];
 	function add(i){
 		if(i.icon) {
 			var a = ul.append('li').append('a').attr('href',i.url)
@@ -10,30 +12,19 @@ export default function() {
 	}
 	function breadcrumb(it) {it.each(function() {
 		me = bulma.select(this).append('nav').attr('class','breadcrumb').attr('aria-label','breadcrumbs')
-		if (align!='')	me.classed(align,true)
+		if (breadcrumb.getAlign()!='')	me.classed(breadcrumb.getAlign(),true)
+		if (breadcrumb.getSize()!='')	me.classed(breadcrumb.getSize(),true)
 		if (sep!='')	me.classed(sep,true)
-		if (sz!='')	me.classed(sz,true)
 		ul = me.append('ul')
 		lst.forEach(add)
+		addSize(breadcrumb, me)
+		addAlign(breadcrumb, me)
 	})}
+	addSize(breadcrumb, me)
+	addAlign(breadcrumb, me)
 	breadcrumb.add	= function(t,u,i) {
 		lst.push({text:t, url:u, icon:i});
 		if(ul) add({text:t, url:u, icon:i})
-		return breadcrumb
-	}
-	breadcrumb.alignLeft	= function() {
-		align='';
-		if(me) 	me.classed('is-centered',false).classed('is-right',false)
-		return breadcrumb
-	}
-	breadcrumb.alignCenter	= function() {
-		align='is-centered';
-		if(me)	me.classed('is-centered',true).classed('is-right',false)
-		return breadcrumb
-	}
-	breadcrumb.alignRight	= function() {
-		align='is-right';
-		if(me)	me.classed('is-centered',false).classed('is-right',true)
 		return breadcrumb
 	}
 	breadcrumb.sepSlash	= function() {
@@ -59,26 +50,6 @@ export default function() {
 	breadcrumb.sepSucceed	= function() {
 		sep='has-succeeds-separator';
 		if(me)  me.classed('has-arrow-separator',false).classed('has-bullet-separator',false).classed('has-dot-separator',false).classed('has-succeeds-separator',true)
-		return breadcrumb
-	}
-	breadcrumb.defaultSize	= function() {
-		sz='';
-		if(me)  me.classed('is-small',false).classed('is-medium',false).classed('is-large',false)
-		return breadcrumb
-	}
-	breadcrumb.small	= function() {
-		sz='is-small';
-		if(me)  me.classed('is-small',true).classed('is-medium',false).classed('is-large',false)
-		return breadcrumb
-	}
-	breadcrumb.medium	= function() {
-		sz='is-medium';
-		if(me)  me.classed('is-small',false).classed('is-medium',true).classed('is-large',false)
-		return breadcrumb
-	}
-	breadcrumb.large	= function() {
-		sz='is-large';
-		if(me)  me.classed('is-small',false).classed('is-medium',false).classed('is-large',true)
 		return breadcrumb
 	}
 	return breadcrumb
