@@ -15,6 +15,10 @@ export default function(maximum = 1, current = 1) {
 		ul.selectChildren().remove()
 		if (cur>max) cur=max
 		if (max<1) return
+		if (cur==1) prv.attr('disabled','').attr('title','This is the first page')
+		else prv.attr('disabled',null).attr('title',null)
+		if (cur==max) nxt.attr('disabled','').attr('title','This is the last page')
+		else nxt.attr('disabled',null).attr('title',null)
 		add(1)
 		if (max < 6) {
 			if (max>1) add(2)
