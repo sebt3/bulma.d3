@@ -1,16 +1,15 @@
 export default function() {
 	var left, lefturl, leftSz='64x64';
 	var me, right, body = bulma.create('div').attr('class', 'media-content');
-	function add2(d,i) { d.node().appendChild(i.node()) }
 	function media(it) {it.each(function() {
 		me = bulma.select(this).append('article').attr('class','media')
 		if(lefturl) {
 			media.left().append('p').attr('class','image is-'+leftSz).append('img').attr('src',lefturl);
-			add2(me,left);
+			me.append(() => left.node())
 		} else if (left)
-			add2(me,left);
-		add2(me,body);
-		if (right) add2(me,right);
+			me.append(() => left.node())
+		me.append(() => body.node())
+		if (right) me.append(() => right.node())
 	})}
 	media.left   = function() {
 		if (!left)
@@ -25,7 +24,7 @@ export default function() {
 	media.right	= function() {
 		if (!right) {
 			right = bulma.create('div').attr('class', 'media-right')
-			if (me)	add2(me, right);
+			if (me)	me.append(() => right.node())
 		}
 		return right;
 	}
