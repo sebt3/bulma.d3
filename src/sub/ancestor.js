@@ -1,14 +1,12 @@
 function parse(data) {
-	if (typeof data.size == 'string') {
-		switch (data.size) {
-			case 'small':
-				return ' is-small';
-			case 'normal':
-				return ' is-normal';
-			case 'medium':
-				return ' is-medium';
-			case 'large':
-				return ' is-large';
+	if (typeof data.state == 'string') {
+		switch (data.state) {
+			case 'ancestor':
+				return ' is-ancestor';
+			case 'parent':
+				return ' is-parent';
+			case 'child':
+				return ' is-child';
 		}
 	}
 	return '';
@@ -17,14 +15,14 @@ function strip(cl) {
 	return cl.replace(/is-small/, '').replace(/is-normal/, '').replace(/is-medium/, '').replace(/is-large/, '').replace(/  +/g, ' ');
 }
 function handler(obj, data) {
-	return function(size) {
+	return function(state) {
 		if (arguments.length) {
 			data.attr = data.attr||{};
-			data.attr.class = strip(data.attr.class || '') + parse({size: size});
-			data.size = size;
+			data.attr.class = strip(data.attr.class || '') + parse({state: state});
+			data.state = state;
 			return obj;
 		}
-		return data.size;
+		return data.state;
 	}
 }
 export default { parse: parse, handler: handler, strip: strip }

@@ -1,20 +1,17 @@
+import {default as size} from "./size.js";
 function parse(data) {
 	if (typeof data.size == 'string') {
 		switch (data.size) {
-			case 'small':
-				return ' is-small';
-			case 'normal':
-				return ' is-normal';
-			case 'medium':
-				return ' is-medium';
-			case 'large':
-				return ' is-large';
+			case 'halfheight':
+				return ' is-halfheight';
+			case 'fullheight':
+				return ' is-fullheight';
 		}
 	}
-	return '';
+	return size.parse(data);
 }
 function strip(cl) {
-	return cl.replace(/is-small/, '').replace(/is-normal/, '').replace(/is-medium/, '').replace(/is-large/, '').replace(/  +/g, ' ');
+	return size.strip(cl).replace(/is-halfheight/, '').replace(/is-fullheight/, '').replace(/  +/g, ' ');
 }
 function handler(obj, data) {
 	return function(size) {
@@ -24,7 +21,7 @@ function handler(obj, data) {
 			data.size = size;
 			return obj;
 		}
-		return data.size;
+ 		return data.size;
 	}
 }
 export default { parse: parse, handler: handler, strip: strip }
